@@ -89,9 +89,22 @@
 						<h3>... or, where are we heading to?</h3>
 					</section>
 					<section>
-						<h3>... or, where are we heading to?</h3>
+						<h3>Main objectives</h3>
 						<div>
-					      
+					     <ul>
+					     	<li>
+					     		Develop versatile tools to facilitate the geometric modeling and mesh generation for the creation of FEM models
+					     	</li>
+					     	<li>
+					     		Specify details of micromechanical models for the study of thin ply mechanics
+					     	</li>
+					     <ul> 
+					    </div>
+					</section>
+					<section>
+						<h3>Requirements</h3>
+						<div>
+					     
 					    </div>
 					</section>
 				</section>
@@ -251,6 +264,28 @@
 							</ul>
 						</div>
 					</section>
+					<section>
+						<h3>One minor problem</h3>
+						<div>
+							<img src="https://ehrtkg-ch3302.files.1drv.com/y3mI9cVg9lvXk8NFxcqNLSPpMUNq9d19NsO9dEWZu71QC3YQaowjnbhNkQTaZ5odM1MMY0vmrr5o0yT8vfyoCWGDuCKCj4TaaZXu4N0bLRHc-2CsZsWy6aSNCtVCIDlCNGZq19MSXgqhIIP76rDiOZI-UaqxT5qoqLWT1mkqoPg8nY?width=2560&height=1536&cropmode=none" alt="my laptop in August 2016"></img>
+						</div>
+					</section>
+					<section>
+						<h3>One minor problem</h3>
+						<div>
+							<p>Laptop's fan broke down in August during EEIGM's summer closure</p>
+							<p>Thus,</p>
+							<p>no access to office's computer</p>
+							<p>no laptop to work from home</p>
+						</div>
+					</section>
+					<section>
+						<h3>Solution</h3>
+						<div>
+							<p>Old fan substituted with new one builted out of scrap parts</p>
+							<p>However, it took around 4/5 days to be fully operational again</p>
+						</div>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -264,11 +299,45 @@
 						<div>
 					     <ul>
 					     	<li>
-					     		Significant increase in the number of functions
+					     		Create transpiler to abaqus, for FEM analysis: est. 5/6 days
 					     	</li>
-					     	
+					     	<li>
+					     		Test transpiler to abaqus: from 0 up to 4 days
+					     	</li>
+					     	<li>
+					     		Test and correct any unobserved bug: from 0 up to 7 days (which may neither be consecutive nor at this stage)
+					     	</li>
+					     	<li>
+					     		Start FEM analysis: in 5 to 17 days (depending on debug phase length)
+					     	</li>
 					     <ul> 
 					    </div>
+					</section>
+				    <section>
+						<h3>In the next 4-6 weeks</h3>
+						<div>
+					     <ul>
+					     	<li>
+					     		Create and test data writer to json format, for portability: est. 1/2 days
+					     	</li>
+					     	<li>
+					     		Create and test data writer to csv format, for analysis: est. 1/2 days
+					     	</li>
+					     	<li>
+					     		Create and test transpiler to latex for geometry and mesh, for automatic reporting: est. 2/3 days
+					     	</li>
+					     	<li>
+					     		Create and test transpiler to latex for mesh quality, for automatic reporting: est. 2/3 days
+					     	</li>
+					     	<li>
+					     		Fully working prototype in 2 to 4 weeks, plus 2 weeks to solve any unforeseen problem
+					     	</li>
+					     <ul> 
+					    </div>
+					</section>
+					<section>
+						<h3>Gantt Chart</h3>
+						<div id="chart_div" style="height: 100%;"></div>
 					</section>
 				</section>
 				
@@ -283,6 +352,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 		<script>
 
@@ -310,7 +380,51 @@
 			});
 
 		</script>
+		<script type="text/javascript">
+		    google.charts.load('current', {'packages':['gantt']});
+		    google.charts.setOnLoadCallback(drawChart);
 		
+		    function daysToMilliseconds(days) {
+		      return days * 24 * 60 * 60 * 1000;
+		    }
+		
+		    function drawChart() {
+		
+		      var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Task ID');
+		      data.addColumn('string', 'Task Name');
+		      data.addColumn('string', 'Resource');
+		      data.addColumn('date', 'Start Date');
+		      data.addColumn('date', 'End Date');
+		      data.addColumn('number', 'Duration');
+		      data.addColumn('number', 'Percent Complete');
+		      data.addColumn('string', 'Dependencies');
+		
+		      data.addRows([
+		      	['workingProto', 'Fully working prototype', 'Main task', new Date(2016, 9, 14), null, daysToMilliseconds(28), 0, null],
+		        ['AbaqusDev', 'Transpiler to Abaqus', 'Sub-tasks', new Date(2016, 9, 14), null, daysToMilliseconds(7),  0,  null],
+		        ['AbaqusTest', 'Test transpiler', 'Sub-tasks', new Date(2016, 9, 18), null, daysToMilliseconds(7), 0, null],
+		        ['GeneralDebug', 'Correct unobserved bugs', 'Sub-tasks', new Date(2016, 9, 19), null, daysToMilliseconds(10), 0, null],
+		        ['StartFEM', 'Start of FEM analysis', 'Sub-tasks', new Date(2016, 9, 20), null, daysToMilliseconds(11), 0, null],
+		        ['jsonWriter', 'JSON writer', 'Sub-tasks', new Date(2016, 9, 25), null, daysToMilliseconds(3), 0, null],
+		        ['csvWriter', 'CSV writer', 'Sub-tasks', new Date(2016, 9, 27), null, daysToMilliseconds(3), 0, null],
+		        ['latexTransGM', 'Latex transpiler for geometry and mesh', 'Sub-tasks', new Date(2016, 9, 29), null, daysToMilliseconds(4), 0, null],
+		        ['latexTransQ', 'Latex transpiler for mesh quality', 'Sub-tasks', new Date(2016, 10, 1), null, daysToMilliseconds(4), 0, null],
+		        ['issues', 'Solve unforeseen issues', 'Additional test/debug', new Date(2016, 10, 10), null, daysToMilliseconds(14), 0, null]
+		      ]);
+		
+		      var options = {
+		        height: 300,
+		        gantt: {
+		        	trackHeight: 30
+		        }
+		      };
+		
+		      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+		
+		      chart.draw(data, options);
+		    }
+		  </script>
 	</body>
 </html>
 
